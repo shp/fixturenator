@@ -217,6 +217,9 @@ class FixturenatorDefinition
                     {  
                         $newObj->$k = $value;
                         $performed = true;
+                    } else {
+                        $newObj->__set($k, $value);
+                        $performed = true;
                     }
                 }
 
