@@ -256,6 +256,15 @@ class FixturenatorDefinition
 
     public static function __detectLambda($possibleLambda, $expectedVarName)
     {
+        if (! is_string($possibleLambda)) return false;
+            // TODO (Jonathan Loesch added the preceding line of code)
+            // I think this is a bug in fixturenator.  Whenever this function
+            // is called, it's preceded by an is_string check.
+            // Except for in one place (line 117, unless lines have moved around)
+            // I just added the check in here, and it seems to stop my segfaulting
+            // Not sure if this is really what we want.
+            //
+            // (TBH, we don't even use lambdas, so this function is really important for us)
         if (strncasecmp('return', $possibleLambda, 6) === 0) return true;
         if (strpos($possibleLambda, "\${$expectedVarName}") !== false) return true;
         return false;
