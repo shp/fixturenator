@@ -229,6 +229,9 @@ class FixturenatorDefinition
                 {  
                     // try accesing instance var directly
                     $vars = get_object_vars($newObj);
+                    if ($newObj instanceof EV_LazyLoader) {
+                        $vars = array_merge($vars, $newObj->getLazyObjectVars());
+                    }
                     if (array_key_exists($k, $vars))
                     {  
                         $newObj->$k = $value;
